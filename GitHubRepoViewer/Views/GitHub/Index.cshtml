@@ -1,0 +1,31 @@
+﻿@model List<Repo>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+
+<h2>Repositories</h2>
+<form method="get">
+	<input type="text" name="username" placeholder="Enter GitHub username"/>
+	<button type="submit">Search</button>
+</form>
+
+<table class="min-w-full border-collapse border border-gray-300">
+	<thead class="bg-gray-800 text-white">
+		<tr>
+			<th>Name</th>
+			<th>Stars</th>
+			<th>Language</th>
+			<th>Link</th>
+		</tr>
+	</thead>
+
+@foreach (var repo in Model)
+{
+	<tr>
+		<td>@repo.Name</td>
+		<td>@repo.Stargazers_count</td>
+		<td>@repo.Language</td>
+		<td><a href="@repo.Html_url" target="_blank">View</a></td>
+	</tr>
+}
+</table>

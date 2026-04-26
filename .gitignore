@@ -1,0 +1,46 @@
+# Build results
+bin/
+obj/
+Debug/
+Release/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ASP.NET scaffolding
+Generated_Code/
+
+# Logs
+*.log
+
+# NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+# Publish output
+publish/
+wwwroot/lib/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.dbmdl
+
+# Resharper / Rider
+_ReSharper*/
+*.DotSettings.user
+
+# VS Code
+.vscode/
+
+# JetBrains Rider
+.idea/
+
+# Environment files
+.env
