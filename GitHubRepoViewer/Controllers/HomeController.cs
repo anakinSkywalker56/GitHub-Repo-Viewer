@@ -7,15 +7,18 @@ namespace GitHubRepoViewer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly GithubrepoviewerDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, GithubrepoviewerDbContext context)
         {
             _logger = logger;
+            _db = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var user = _db.Users.FirstOrDefault();
+            return View(user);
         }
 
         public IActionResult Privacy()
