@@ -34,7 +34,7 @@ namespace GitHubRepoViewer.Controllers
             HttpContext.Session.SetString("Username", user.Username);
 
             // ✅ Redirect ALL users to UserInfo
-            return RedirectToAction("UserInfo", "Home");
+            return RedirectToAction("Index", "GitHub");
         }
 
 
