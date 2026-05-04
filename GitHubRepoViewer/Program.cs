@@ -1,10 +1,23 @@
-using GitHubRepoViewer.Services;
+﻿using GitHubRepoViewer.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<GitHubService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddDbContext<GithubrepoviewerDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // adjust as needed
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+
 
 var app = builder.Build();
 
@@ -16,6 +29,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+// ✅ Enable session middleware
+app.UseSession();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -23,8 +40,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Set default landing page
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=GitHub}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

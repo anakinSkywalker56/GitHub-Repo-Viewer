@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="flex justify-center items-center h-full text-[#c9d1d9]">
+    <div class="w-full max-w-md p-8 rounded-lg shadow-lg bg-[#161b22]" id="loginbox">
+        <h2 class="text-2xl font-semibold mb-6 text-center text-[#f0f6fc]">Login</h2>
+
+        <form asp-action="Login" method="post">
+            <div class="mb-4 flex items-center">
+                <label for="username" class="w-32 text-left text-[#f0f6fc]">Username</label>
+                <input type="text" id="username" name="username"
+                       class="flex-1 p-2 rounded bg-[#0d1117] text-white border border-[#30363d] focus:outline-none focus:ring-2 focus:ring-[#58a6ff]"
+                       required />
+            </div>
+
+            <div class="mb-4 flex items-center">
+                <label for="password" class="w-32 text-left text-[#f0f6fc]">Password</label>
+                <input type="password" id="password" name="password"
+                       class="flex-1 p-2 rounded bg-[#0d1117] text-white border border-[#30363d] focus:outline-none focus:ring-2 focus:ring-[#58a6ff]"
+                       required />
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-[#0969DA] hover:bg-[#4183C4] text-white font-semibold py-2 px-4 rounded">
+                Login
+            </button>
+        </form>
+
+        <div class="mt-6 text-center">
+            <a asp-action="Register" asp-controller="Account"
+               class="inline-block w-full text-white hover:text-[#0969DA] font-semibold py-2 px-4 rounded">
+                No account yet? Sign up
+            </a>
+        </div>
+    </div>
+</div>

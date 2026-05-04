@@ -44,3 +44,21 @@ _ReSharper*/
 
 # Environment files
 .env
+
+# Node / npm
+node_modules/
+package-lock.json
+
+# Tailwind / build outputs
+wwwroot/css/output.css
+wwwroot/js/githubRepoViewer.js
+
+# Backend generated folder (if not source)
+Backend/
+
+# Logs
+*.log
+
+# User secrets (optional)
+appsettings.Development.json
+

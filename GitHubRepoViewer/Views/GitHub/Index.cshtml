@@ -3,29 +3,51 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 
-<h2>Repositories</h2>
-<form method="get">
-	<input type="text" name="username" placeholder="Enter GitHub username"/>
-	<button type="submit">Search</button>
-</form>
+<div class="h-[600px] bg-gray-900 text-gray-100 p-6 rounded-2xl p-10">
+	<h2 class="text-3xl font-bold text-gray-100 mb-4">Repositories</h2>
 
-<table class="min-w-full border-collapse border border-gray-300">
-	<thead class="bg-gray-800 text-white">
-		<tr>
-			<th>Name</th>
-			<th>Stars</th>
-			<th>Language</th>
-			<th>Link</th>
-		</tr>
-	</thead>
+    <div class="">
+	    <form method="get" class="mb-6 flex gap-2">
+		    <input type="text" name="username" placeholder="Enter GitHub username"
+			       class="px-4 py-2 rounded bg-gray-800 text-gray-100 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+		    <button type="submit"
+				    class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">
+			    Search
+		    </button>
+	    </form>
+    </div>
 
-@foreach (var repo in Model)
-{
-	<tr>
-		<td>@repo.Name</td>
-		<td>@repo.Stargazers_count</td>
-		<td>@repo.Language</td>
-		<td><a href="@repo.Html_url" target="_blank">View</a></td>
-	</tr>
-}
-</table>
+    <div class="h-[425px] overflow-y-scroll [scrollbar-width:none] [-ms-overflow-style:none]">
+
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="text-red-500 font-bold mb-4">@ViewBag.ErrorMessage</div>
+        }
+
+        <table class="min-w-full">
+            <thead class="bg-gray-800 text-gray-100">
+                <tr>
+                    <th>Name</th>
+                    <th>Stars</th>
+                    <th>Language</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var repo in Model)
+                {
+                    <tr class="hover:bg-gray-700">
+                        <td>@repo.Name</td>
+                        <td>@repo.Stargazers_count</td>
+                        <td>@repo.Language</td>
+                        <td>
+                            <a href="@repo.Html_url" target="_blank" class="text-blue-400 hover:underline">View</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
