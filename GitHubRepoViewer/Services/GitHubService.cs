@@ -17,6 +17,12 @@ namespace GitHubRepoViewer.Services
         public async Task<List<Repo>> GetReposAsync(string username)
         {
             var response = await _httpClient.GetAsync($"https://api.github.com/users/{username}/repos");
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound) {
+                
+                return null;
+            }
+            
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
