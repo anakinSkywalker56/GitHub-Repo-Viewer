@@ -23,7 +23,7 @@
   </ItemGroup>
 
 	<Target Name="BuildCss" BeforeTargets="Compile">
-		<Exec Command="npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/output.css --watch"/>
+		<Exec Command="npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/output.css --watch" />
 	</Target>
 
 </Project>

@@ -1,0 +1,65 @@
+﻿@model List<Note>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="flex flex-wrap justify-center gap-6">
+    @* Sidebar *@
+    <div class="h-[600px] w-[400px] bg-gray-900 p-6 rounded-2xl ">
+        <div class="text-2xl mb-5">Utilities</div>
+        <div class="flex flex-col space-y-2">
+            <a asp-controller="GitHub" asp-action="Index">Search Repo</a>
+            <a asp-controller="Favorites" asp-action="Index">Favorites</a>
+            <a asp-controller="History" asp-action="Index">History</a>
+            <a class="text-red-400 hover:text-red-600" asp-controller="Account" asp-action="Login">Logout</a>
+        </div>
+    </div>
+
+    @* Main Body *@
+    <div class="h-[600px] w-[1000px] bg-gray-900 text-gray-100 p-6 rounded-2xl">
+
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">Notes for @ViewBag.RepoName</h2>
+            <a asp-controller="GitHub" asp-action="Index" class="px-4 py-2 bg-gray-700 text-gray-100 rounded hover:bg-gray-600">
+                Back
+            </a>
+        </div>
+
+        <form asp-action="Save" method="post">
+            <input type="hidden" name="repoName" value="@ViewBag.RepoName" />
+            <input type="hidden" name="id" value="@ViewBag.EditNoteId" />
+            <textarea name="noteText" class="w-full p-2 rounded bg-gray-800 text-gray-100">@(
+                ViewBag.AutoEdit ? ViewBag.EditNoteText : ""
+            )</textarea>
+            <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded">
+                @(ViewBag.AutoEdit ? "Update Note" : "Add Note")
+            </button>
+        </form>
+
+
+
+        @if (!Model.Any())
+        {
+            <div class="text-gray-400 italic mt-4">No notes yet</div>
+        }
+        else
+        {
+            <ul class="mt-4 space-y-2">
+                @foreach (var note in Model)
+                {
+                    <li class="bg-gray-700 p-3 rounded flex justify-between items-center">
+                        <div>
+                            <div>@note.NoteText</div>
+                            <div class="text-sm text-gray-400">@note.CreatedAt.ToString("yyyy-MM-dd HH:mm")</div>
+                        </div>
+                        <form asp-action="Edit" asp-route-id="@note.Id" asp-route-repoName="@ViewBag.RepoName" method="post">
+                            <button type="submit" class="text-blue-400 hover:text-blue-600">Edit</button>
+                        </form>
+                        <form asp-action="Delete" asp-route-id="@note.Id" asp-route-repoName="@ViewBag.RepoName" method="post">
+                            <button type="submit" class="text-red-400 hover:text-red-600">Delete</button>
+                        </form>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>

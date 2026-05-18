@@ -62,3 +62,29 @@ Backend/
 # User secrets (optional)
 appsettings.Development.json
 
+# ASP.NET Core runtime files
+*.db        # SQLite or local dev DBs
+*.sqlite
+*.sqlite3
+
+# EF Core migrations snapshots (optional if you regenerate often)
+Migrations/
+
+# Compiled Razor views
+*.g.cshtml.cs
+
+# Publish profiles
+Properties/PublishProfiles/
+
+# Local secrets and configs
+appsettings.json        # ignore real secrets
+appsettings.*.json      # ignore environment-specific configs
+!appsettings.example.json   # keep a template for others
+
+# Tailwind/PostCSS cache
+*.css.map
+postcss.config.js       # if machine-specific
+tailwind.config.js      # if machine-specific
+
+# IDE caches
+*.cache

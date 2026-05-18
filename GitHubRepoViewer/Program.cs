@@ -1,5 +1,6 @@
 ﻿using GitHubRepoViewer.Services;
 using Microsoft.EntityFrameworkCore;
+using GitHubRepoViewer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddScoped<FavoritesService>();
+
 
 
 
@@ -38,6 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Set default landing page
