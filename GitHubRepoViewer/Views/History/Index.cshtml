@@ -25,29 +25,31 @@
         }
         else
         {
-            <table class="min-w-full bg-gray-800 text-gray-100 rounded">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2 text-left">Search Term</th>
-                        <th class="px-4 py-2 text-left">Date</th>
-                        <th class="px-4 py-2 text-left">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr class="hover:bg-gray-700">
-                            <td class="px-4 py-2">@item.Query</td>
-                            <td class="px-4 py-2">@item.CreatedAt.ToString("yyyy-MM-dd")</td>
-                            <td class="px-4 py-2">
-                                <form asp-controller="History" asp-action="Delete" asp-route-id="@item.Id" method="post">
-                                    <button type="submit" class="text-red-400 hover:text-red-600">✕</button>
-                                </form>
-                            </td>
+            <div class="h-[475px] overflow-y-scroll [scrollbar-width:none] [-ms-overflow-style:none]">
+                <table class="min-w-full bg-gray-800 text-gray-100 rounded">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 text-left">Search Term</th>
+                            <th class="px-4 py-2 text-left">Date</th>
+                            <th class="px-4 py-2 text-left">Actions</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="hover:bg-gray-700">
+                                <td class="px-4 py-2">@item.Query</td>
+                                <td class="px-4 py-2">@item.CreatedAt.ToString("yyyy-MM-dd")</td>
+                                <td class="px-4 py-2">
+                                    <form asp-controller="History" asp-action="Delete" asp-route-id="@item.Id" method="post">
+                                        <button type="submit" class="text-red-400 hover:text-red-600">✕</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         }
     </div>
 </div>
