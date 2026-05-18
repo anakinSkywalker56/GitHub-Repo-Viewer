@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using GitHubRepoViewer.Models;
 using Microsoft.AspNetCore.Mvc;
+using GitHubRepoViewer.Data;
 
 namespace GitHubRepoViewer.Controllers
 {

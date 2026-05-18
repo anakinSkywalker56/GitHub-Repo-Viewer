@@ -1,0 +1,53 @@
+﻿@model List<History>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="flex flex-wrap justify-center gap-6">
+    <!-- Sidebar -->
+    <div class="h-[600px] w-[400px] bg-gray-900 p-6 rounded-2xl ">
+        <div class="text-2xl mb-5">Utilities</div>
+        <div class="flex flex-col space-y-2">
+            <a asp-controller="GitHub" asp-action="Index">Search Repo</a>
+            <a asp-controller="Favorites" asp-action="Index">Favorites</a>
+            <a asp-controller="History" asp-action="Index">History</a>
+            <a class="text-red-400 hover:text-red-600" asp-controller="Account" asp-action="Login">Logout</a>
+
+        </div>
+    </div>
+
+    <!-- Main Body -->
+    <div class="h-[600px] w-[1000px] bg-gray-900 text-gray-100 p-6 rounded-2xl">
+        <h2 class="text-3xl font-bold mb-4">Search History</h2>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="text-gray-400 italic">History empty</div>
+        }
+        else
+        {
+            <table class="min-w-full bg-gray-800 text-gray-100 rounded">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 text-left">Search Term</th>
+                        <th class="px-4 py-2 text-left">Date</th>
+                        <th class="px-4 py-2 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="hover:bg-gray-700">
+                            <td class="px-4 py-2">@item.Query</td>
+                            <td class="px-4 py-2">@item.CreatedAt.ToString("yyyy-MM-dd")</td>
+                            <td class="px-4 py-2">
+                                <form asp-controller="History" asp-action="Delete" asp-route-id="@item.Id" method="post">
+                                    <button type="submit" class="text-red-400 hover:text-red-600">✕</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
